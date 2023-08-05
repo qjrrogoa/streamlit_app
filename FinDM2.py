@@ -2,6 +2,8 @@
 import streamlit as st
 import requests
 from streamlit_chat import message
+import openai
+openai.api_key = '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'
  
 def generate_response(prompt):
     completions = openai.Completion.create (
