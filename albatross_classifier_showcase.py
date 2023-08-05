@@ -16,7 +16,7 @@ from peft import PeftModel, PeftConfig
 import streamlit as st
 import requests
 from streamlit_chat import message
-
+from huggingface_hub import login
 
 # In[2]:
 
@@ -24,6 +24,8 @@ from streamlit_chat import message
 '''
 LoRA parameter를 가져오고 llama2에 연결합니다.
 '''
+
+login(token='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')
 peft_model_id = "RAIJAY/albatross_classifier"
 config = PeftConfig.from_pretrained(peft_model_id)
 model = AutoModelForCausalLM.from_pretrained(config.base_model_name_or_path, return_dict=True, load_in_8bit=True, device_map='auto')
