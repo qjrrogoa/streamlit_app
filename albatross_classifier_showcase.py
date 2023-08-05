@@ -20,11 +20,6 @@ from huggingface_hub import login
 
 # In[2]:
 
-
-'''
-LoRA parameter를 가져오고 llama2에 연결합니다.
-'''
-
 login(token='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')
 peft_model_id = "RAIJAY/albatross_classifier"
 config = PeftConfig.from_pretrained(peft_model_id)
