@@ -27,3 +27,5 @@ streamlit
 datasets
 fire
 streamlit_chat
+bitsandbytes
+message
