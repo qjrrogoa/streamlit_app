@@ -6,4 +6,3 @@ bitsandbytes
 accelerate
 streamlit
 streamlit_chat
-message
