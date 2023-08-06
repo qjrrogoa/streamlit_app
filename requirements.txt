@@ -5,5 +5,5 @@ peft
 huggingface_hub
 bitsandbytes
 accelerate
-streamlit_chat
+streamlit-chat
 streamlit
