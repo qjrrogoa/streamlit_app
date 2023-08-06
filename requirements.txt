@@ -6,4 +6,3 @@ huggingface_hub
 bitsandbytes
 accelerate
 streamlit
-streamlit-chat
