@@ -1,9 +1,5 @@
-torch
-requests
 transformers
 peft
 huggingface_hub
-bitsandbytes
-accelerate
 streamlit-chat
 streamlit
