@@ -3,17 +3,10 @@
 
 # In[1]:
 
-
-import torch
-import torch.nn as nn
-from torch import cuda, bfloat16
-
-from transformers import BitsAndBytesConfig
-from transformers import AutoConfig, AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel, PeftConfig
 
 import streamlit as st
-import requests
 from streamlit_chat import message
 
 from huggingface_hub import login
@@ -23,10 +16,6 @@ login(token='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')
 
 # In[2]:
 
-
-'''
-LoRA parameter를 가져오고 llama2에 연결합니다.
-'''
 peft_model_id = "RAIJAY/albatross_classifier"
 config = PeftConfig.from_pretrained(peft_model_id)
 model = AutoModelForCausalLM.from_pretrained(config.base_model_name_or_path, return_dict=True, load_in_8bit=True, device_map='auto')
@@ -40,15 +29,14 @@ def evaluate_model(model, tokenizer, device, instruction, input=None, temperatur
     prompt = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n" + prompt_instruction.format(instruction)
 
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
-    with torch.no_grad():
-        generation_output = model.generate(
-            input_ids=inputs["input_ids"],
-            temperature=temperature,
-            top_p=top_p,
-            top_k=top_k,
-            num_beams=num_beams,
-            max_length=max_new_tokens + inputs["input_ids"].shape[1]
-        )
+    generation_output = model.generate(
+        input_ids=inputs["input_ids"],
+        temperature=temperature,
+        top_p=top_p,
+        top_k=top_k,
+        num_beams=num_beams,
+        max_length=max_new_tokens + inputs["input_ids"].shape[1]
+    )
     
     output = tokenizer.decode(generation_output[0])
     return output.split("### Response:")[1].strip()
